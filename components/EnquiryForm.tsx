@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import Link from "next/link";
 import Icon from "@/components/Icon";
 import { emptyEnquiry, validateEnquiry, whatsappText, type Enquiry, type EnquiryKind, type FieldErrors } from "@/lib/enquiry";
 import { company, productById, products, quantityUnits, requirementTypes, waLink } from "@/lib/site";
@@ -14,6 +15,8 @@ type Status =
 export default function EnquiryForm({ kind }: { kind: EnquiryKind }) {
   const [data, setData] = useState<Enquiry>(() => emptyEnquiry(kind));
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [consent, setConsent] = useState(true);
+  const [consentError, setConsentError] = useState("");
   const [status, setStatus] = useState<Status>({ state: "idle" });
   const formRef = useRef<HTMLFormElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
@@ -59,6 +62,12 @@ export default function EnquiryForm({ kind }: { kind: EnquiryKind }) {
       formRef.current?.querySelector<HTMLElement>(`[data-field="${first}"] input, [data-field="${first}"] textarea`)?.focus();
       return;
     }
+
+    if (!consent) {
+      setConsentError("Please accept the privacy consent to proceed.");
+      return;
+    }
+    setConsentError("");
 
     if (channel === "whatsapp") {
       // Open synchronously (inside the click) so pop-up blockers allow it, then email a copy in the background.
@@ -218,6 +227,27 @@ export default function EnquiryForm({ kind }: { kind: EnquiryKind }) {
           </span>
         </div>
       )}
+
+      <div className={`field full${consentError ? " invalid" : ""}`} style={{ margin: "16px 0 8px" }}>
+        <label style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer", fontSize: 13, color: "var(--muted)", fontWeight: "normal" }}>
+          <input
+            type="checkbox"
+            checked={consent}
+            onChange={(e) => {
+              setConsent(e.target.checked);
+              if (e.target.checked) setConsentError("");
+            }}
+            style={{ width: 17, height: 17, marginTop: 2, accentColor: "var(--orange)", flexShrink: 0 }}
+          />
+          <span>
+            I agree to {company.name} processing my details to respond to this commercial enquiry as set out in the{" "}
+            <Link href="/privacy" target="_blank" style={{ color: "var(--orange-600)", textDecoration: "underline" }}>
+              Privacy Policy
+            </Link>.
+          </span>
+        </label>
+        {consentError && <span className="err">{consentError}</span>}
+      </div>
 
       <div className="form-actions">
         <button className="btn btn-primary" type="submit" data-via="email" disabled={sending}>

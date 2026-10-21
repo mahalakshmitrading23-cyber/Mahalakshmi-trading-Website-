@@ -34,9 +34,15 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+  overflow-x: clip;
+}
 body {
   margin: 0;
+  width: 100%;
+  overflow-x: clip;
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.65;

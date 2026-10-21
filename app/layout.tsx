@@ -25,6 +25,12 @@ export const metadata: Metadata = {
     description: "B2B supplier of Denatured Anhydrous Ethanol (99.9%), SDS, ENA and Molasses. Pan-India supply since 2010.",
     images: ["/img/logo.png"],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mahalakshmi Tradings — Bulk Ethanol, Alcohol & Molasses",
+    description: "B2B supplier of Denatured Anhydrous Ethanol (99.9%), SDS, ENA and Molasses. Pan-India supply since 2010.",
+    images: ["/img/logo.png"],
+  },
 };
 
 export const viewport: Viewport = { themeColor: "#17191c" };

@@ -46,9 +46,14 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <div className="container">
-            <span>© {new Date().getFullYear()} {company.name}. All rights reserved.</span>
-            <span>B2B supply only · Products supplied for industrial / licensed use. · <Link href="/credits">Image credits</Link></span>
+          <div className="container" style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 12 }}>
+            <span>© {new Date().getFullYear()} {company.name}. All rights reserved. GSTIN: {company.gstin}</span>
+            <span className="footer-legal-links" style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
+              <Link href="/privacy">Privacy Policy</Link>
+              <Link href="/terms">Terms of Service</Link>
+              <Link href="/refund-policy">Cancellation &amp; Refund</Link>
+              <Link href="/credits">Image Credits</Link>
+            </span>
           </div>
         </div>
       </footer>
