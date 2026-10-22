@@ -1,11 +1,9 @@
 import Link from "next/link";
 import Icon from "@/components/Icon";
-import { HeroRing } from "@/components/Sections";
 
 export default function NotFound() {
   return (
     <section className="page-hero" style={{ padding: "110px 0 120px" }}>
-      <HeroRing />
       <div className="container">
         <span className="kicker">Error 404</span>
         <h1>This page could not be found.</h1>

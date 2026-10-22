@@ -49,20 +49,6 @@ export default function Header() {
 
   return (
     <>
-      <div className="topbar">
-        <div className="container">
-          <div className="topbar-left">
-            <span className="b2b-pill">B2B Supply Only</span>
-            <a href={`tel:${company.phones[0].tel}`}><Icon name="phone" />{company.phones[0].display}</a>
-            <a className="hide-md" href={`mailto:${company.email}`}><Icon name="mail" />{company.email}</a>
-          </div>
-          <div className="topbar-right">
-            <span>GSTIN: {company.gstin}</span>
-            <a href={waLink()} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp</a>
-          </div>
-        </div>
-      </div>
-
       <header className={`site-header${scrolled ? " scrolled" : ""}`}>
         <div className="container">
           <Brand />

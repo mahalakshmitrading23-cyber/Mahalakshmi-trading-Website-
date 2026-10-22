@@ -4,15 +4,6 @@ import Icon, { type IconName } from "@/components/Icon";
 import { LazyVideo } from "@/components/Motion";
 import { allClients, company, industries, products, waLink, type Product } from "@/lib/site";
 
-export function HeroRing() {
-  return (
-    <svg className="hero-ring" viewBox="0 0 200 200" aria-hidden="true">
-      <circle cx="100" cy="100" r="88" fill="none" stroke="#ef8a1e" strokeWidth="12" strokeDasharray="330 600" transform="rotate(120 100 100)" />
-      <circle cx="100" cy="100" r="88" fill="none" stroke="#ffffff" strokeWidth="12" strokeDasharray="180 600" transform="rotate(-20 100 100)" />
-    </svg>
-  );
-}
-
 export function PageHero({
   title, lead, crumbs, image,
 }: { title: string; lead: string; crumbs: { href?: string; label: string }[]; image?: string }) {
@@ -23,7 +14,6 @@ export function PageHero({
           <Image src={image} alt="" fill priority sizes="100vw" />
         </div>
       )}
-      <HeroRing />
       <div className="container">
         <nav className="crumbs" aria-label="Breadcrumb">
           <Link href="/">Home</Link>
@@ -58,7 +48,7 @@ export function CtaBand() {
         <div className="cta-band reveal">
           <div style={{ position: "relative", zIndex: 1 }}>
             <h2>Need ethanol, alcohol or molasses for your plant?</h2>
-            <p>Send us your requirement — product, quantity and delivery location — and get a quotation from our team.</p>
+            <p>Send us the product, quantity and delivery location. Phone or WhatsApp is usually the quickest way to reach us.</p>
           </div>
           <div className="cta-actions">
             <Link className="btn btn-dark" href="/quote">Request a Quote <Icon name="arrow-right" /></Link>
@@ -70,39 +60,26 @@ export function CtaBand() {
   );
 }
 
-/** Decorative orange/grey arc echoing the circle in the MT logo. */
-export function RingArc({ className = "" }: { className?: string }) {
+/** Home page: each product as a labelled sample tag, photo on top and a paper label below. */
+export function ProductTags() {
   return (
-    <svg className={`ring-arc ${className}`} viewBox="0 0 200 200" aria-hidden="true">
-      <circle cx="100" cy="100" r="90" fill="none" stroke="var(--orange)" strokeWidth="7" strokeDasharray="300 600" strokeLinecap="round" transform="rotate(110 100 100)" />
-      <circle cx="100" cy="100" r="90" fill="none" stroke="var(--grey)" strokeWidth="7" strokeDasharray="170 600" strokeLinecap="round" transform="rotate(-40 100 100)" />
-    </svg>
-  );
-}
-
-/** Home page: photo-led bento grid — flagship product large, the rest as image tiles. */
-export function ProductBento() {
-  return (
-    <div className="bento">
+    <div className="tags">
       {products.map((p, i) => (
-        <article key={p.id} className={`bento-tile bento-${p.id} reveal reveal-clip${i ? ` reveal-d${Math.min(i, 3)}` : ""}`}>
-          <span className="bento-img" data-parallax={p.highlight ? "0.08" : "0.05"}>
-            <Image src={p.image} alt={p.imageAlt} fill sizes={p.highlight ? "(max-width: 980px) 100vw, 780px" : "(max-width: 980px) 100vw, 400px"} />
-          </span>
-          {p.highlight && <RingArc className="bento-ring" />}
-          {p.highlight && <span className="bento-flag">Main product</span>}
-          <div className="bento-body">
-            <span className="bento-code"><Icon name={p.icon} />{p.code}</span>
-            <h3>{p.name}</h3>
-            <p>{p.highlight ? p.cardText : p.menuNote}</p>
-            {p.highlight && (
-              <div className="bento-stats">
-                {p.cardSpecs.map(([k, v]) => <span key={k}><small>{k}</small><strong>{v}</strong></span>)}
-              </div>
-            )}
-            <div className="bento-actions">
-              <Link className="btn btn-primary btn-sm" href={`/quote?product=${p.id}`}>Get Quote</Link>
-              <Link className="bento-more" href={`/products/${p.slug}`}>Details <Icon name="arrow-right" /></Link>
+        <article key={p.id} className={`tag-card reveal${i ? ` reveal-d${Math.min(i, 3)}` : ""}${p.highlight ? " is-main" : ""}`}>
+          <Link href={`/products/${p.slug}`} className="tag-photo" tabIndex={-1} aria-hidden="true">
+            <Image src={p.image} alt="" fill sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 290px" />
+            {p.highlight && <span className="tag-flag">Main product</span>}
+          </Link>
+          <div className="tag-label">
+            <span className="tag-hole" aria-hidden="true" />
+            <div className="tag-top"><span>No. {String(i + 1).padStart(2, "0")}</span><span>{p.short}</span></div>
+            <h3><Link href={`/products/${p.slug}`}>{p.name}</Link></h3>
+            <dl className="tag-specs">
+              {p.cardSpecs.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
+            </dl>
+            <div className="tag-actions">
+              <Link className="link-arrow" href={`/quote?product=${p.id}`}>Get quote <Icon name="arrow-right" /></Link>
+              <Link className="tag-more" href={`/products/${p.slug}`}>Details</Link>
             </div>
           </div>
         </article>
@@ -118,7 +95,6 @@ export function ProductShowcase() {
       {products.map((p, i) => (
         <article key={p.id} className={`show-row${i % 2 ? " flip" : ""}`}>
           <div className="show-media">
-            <RingArc className="show-ring" />
             <figure className="show-figure reveal reveal-clip">
               <span className="show-img" data-parallax="0.1">
                 <Image src={p.image} alt={p.imageAlt} fill sizes="(max-width: 980px) 100vw, 680px" />
@@ -222,8 +198,7 @@ export function ClientMarquee() {
       <div className="marquee-track">
         {loop.map((c, i) => (
           <div className="client-chip" key={i} aria-hidden={i >= allClients.length || undefined}>
-            <Monogram initials={c.initials} i={i} />
-            <span><strong>{c.name}</strong><small>{c.product}</small></span>
+            <strong>{c.name}</strong><small>{c.product}</small>
           </div>
         ))}
       </div>
@@ -282,16 +257,84 @@ export function ProductDetail({ p }: { p: Product }) {
   );
 }
 
-/** Oversized outline text that slides sideways as the page scrolls. */
-export function ScrollTextStrip({ items }: { items: string[] }) {
-  const row = [...items, ...items, ...items];
+/** Stylised supply routes fanning out from Baramati. Deliberately not a map outline. */
+const ROUTES = [
+  "M150 182 Q 140 90 176 26", "M150 182 Q 230 110 330 64", "M150 182 Q 280 160 372 150",
+  "M150 182 Q 250 240 318 268", "M150 182 Q 180 250 196 292", "M150 182 Q 90 120 54 86", "M150 182 Q 80 196 30 214",
+];
+
+export function RouteMap() {
   return (
-    <section className="text-strip" aria-hidden="true">
-      <div className="text-strip-row" data-scroll-x="-0.6">
-        {row.map((t, i) => <span key={i} className={i % 2 ? "solid" : undefined}>{t}<i>✦</i></span>)}
-      </div>
-      <div className="text-strip-row" data-scroll-x="0.6">
-        {row.map((t, i) => <span key={i} className={i % 2 ? undefined : "solid"}>{t}<i>✦</i></span>)}
+    <figure className="route-map" aria-label={`Bulk supply routes from ${company.address.city} to plants across India`}>
+      <svg viewBox="0 0 400 310" role="img" aria-hidden="true">
+        <defs>
+          <pattern id="route-dots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" /></pattern>
+        </defs>
+        <rect className="route-grid" width="400" height="310" fill="url(#route-dots)" />
+        {ROUTES.map((d) => {
+          const end = d.split(" ").slice(-2);
+          return (
+            <g key={d}>
+              <path className="route-line" d={d} />
+              <circle className="route-end" cx={end[0]} cy={end[1]} r="4.5" />
+            </g>
+          );
+        })}
+        <circle className="route-pulse" cx="150" cy="182" r="10" />
+        <circle className="route-pin" cx="150" cy="182" r="7" />
+        <text className="route-label" x="164" y="200">Baramati</text>
+      </svg>
+      <figcaption>Supplied pan-India from Baramati</figcaption>
+    </figure>
+  );
+}
+
+/** A short letter from the people who run the business, beside a photo of where it all comes from. */
+export function DeskNote() {
+  const facts = [
+    { k: `Since ${company.founded}`, v: "Trading from Baramati, next to the mills and distilleries" },
+    { k: "GST invoiced", v: `Every order, with permits where needed. GSTIN ${company.gstin}` },
+    { k: "Pan-India", v: "Bulk dispatch to your plant, wherever it is" },
+  ];
+  return (
+    <section className="section desk">
+      <div className="container">
+        <div className="desk-grid">
+          <figure className="desk-photo reveal reveal-clip">
+            <span className="desk-photo-inner" data-parallax="0.08">
+              <Image src="/media/sugarcane-transport.jpg" alt="Tractor carrying freshly harvested sugarcane to the factory near Baramati" fill sizes="(max-width: 980px) 100vw, 460px" />
+            </span>
+            <figcaption><span lang="mr">बारामती</span> Baramati, Maharashtra</figcaption>
+          </figure>
+          <div className="desk-body reveal reveal-d1">
+            <span className="kicker">From the desk</span>
+            <article className="desk-letter">
+              <p className="desk-hello">Namaskar,</p>
+              <p>
+                {company.founder.split(" ")[0]} {company.founder.split(" ").at(-1)} started this business in {company.founded}, here in Baramati,
+                with cane fields on every side and sugar mills down the road. I run it day to day now.
+              </p>
+              <p>
+                We deal in four products and nothing else. Keeping the list short means we know each one properly, from the grade
+                and the paperwork to how it travels. Call or WhatsApp us with what you need and you&apos;ll get a straight answer.
+              </p>
+              <p className="desk-sign">{company.runBy}</p>
+              <p className="desk-role">{company.name}</p>
+              <span className="desk-stamp" aria-hidden="true">
+                <b>GST Regd.</b>
+                <span>{company.gstin}</span>
+              </span>
+            </article>
+          </div>
+        </div>
+        <div className="desk-reach reveal">
+          <RouteMap />
+          <dl className="desk-facts">
+            {facts.map((f) => (
+              <div key={f.k}><dt>{f.k}</dt><dd>{f.v}</dd></div>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   );

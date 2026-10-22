@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Icon from "@/components/Icon";
 import { CtaBand, PageHero, ProductShowcase, SectionHead } from "@/components/Sections";
+import { company, waLink } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Products — Denatured Anhydrous Ethanol, SDS, ENA & Molasses",
@@ -25,7 +26,7 @@ export default function ProductsPage() {
         crumbs={[{ label: "Products" }]}
         image="/media/ethanol-plant-aerial.jpg"
         title="Our products"
-        lead="Four industrial raw materials from the sugar and ethanol value chain — explained simply, with the key details procurement teams need."
+        lead="Four industrial raw materials from the sugar and ethanol chain, explained simply, with the details procurement teams need."
       />
 
       <section className="section showcase-section">
@@ -35,8 +36,11 @@ export default function ProductsPage() {
       </section>
 
       <section className="section section-soft">
-        <div className="container">
-          <SectionHead center kicker="Buyer FAQs" title="Common questions before ordering" />
+        <div className="container faq-wrap">
+          <div className="faq-side">
+            <SectionHead kicker="Buyer FAQs" title="Common questions before ordering" lead="Still unsure? Ask us directly. We usually reply fastest on WhatsApp." />
+            <a className="btn btn-dark" href={waLink(`Hello ${company.name}, I have a question about your products.`)} target="_blank" rel="noopener"><Icon name="whatsapp" />Ask on WhatsApp</a>
+          </div>
           <div className="faq reveal">
             {FAQ.map((f) => (
               <details key={f.q}>

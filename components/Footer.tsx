@@ -9,6 +9,16 @@ export default function Footer() {
   return (
     <>
       <footer className="site-footer">
+        <div className="container footer-talk">
+          <span className="kicker">Talk to us directly</span>
+          <h2>Let&apos;s talk.</h2>
+          <a className="footer-phone" href={`tel:${company.phones[0].tel}`}>{company.phones[0].display}</a>
+          <div className="footer-talk-links">
+            <a href={waLink(WA_HELLO)} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp <Icon name="arrow-right" /></a>
+            <a href={`mailto:${company.email}`}><Icon name="mail" />Email <Icon name="arrow-right" /></a>
+            <Link href="/quote"><Icon name="file" />Request a quote <Icon name="arrow-right" /></Link>
+          </div>
+        </div>
         <div className="container footer-grid">
           <div className="footer-brand">
             <Link className="brand" href="/">
@@ -45,6 +55,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
+        <div className="footer-wordmark" aria-hidden="true" lang="mr">महालक्ष्मी</div>
         <div className="footer-bottom">
           <div className="container" style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 12 }}>
             <span>© {new Date().getFullYear()} {company.name}. All rights reserved. GSTIN: {company.gstin}</span>

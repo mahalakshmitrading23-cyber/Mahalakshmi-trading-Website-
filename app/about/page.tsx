@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import Icon, { type IconName } from "@/components/Icon";
-import { Counter } from "@/components/Effects";
+import Icon from "@/components/Icon";
 import { LazyVideo } from "@/components/Motion";
-import { CtaBand, PageHero, SectionHead } from "@/components/Sections";
-import { company, industries, products } from "@/lib/site";
+import { CtaBand, PageHero, SectionHead, VideoBand } from "@/components/Sections";
+import { company, products } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Us — Ethanol & Molasses Trader, Baramati",
@@ -19,14 +18,13 @@ const TIMELINE = [
   { tag: "Today", title: "The next generation", text: `Now run by ${company.runBy}, the company serves chemical, pharmaceutical, petroleum, beverage and cattle-feed industries across India.` },
 ];
 
-const MV: { icon: IconName; title: string; text: string }[] = [
-  { icon: "target", title: "Our mission", text: "To supply industry with consistent, specification-ready ethanol, alcohol and molasses — on time, with complete documentation and honest dealing." },
-  { icon: "eye", title: "Our vision", text: "To be a leading trading partner in India's green-energy value chain, growing alongside our customers as ethanol's role in industry and fuel expands." },
-  { icon: "heart", title: "Our values", text: "Integrity in every transaction, reliability in every delivery, and long-term relationships over one-time deals." },
+const RULES: { title: string; text: string }[] = [
+  { title: "Say what we can supply, and supply it", text: "If a grade or quantity isn't available, you hear it from us before you plan around it." },
+  { title: "Paperwork goes with the tanker", text: "GST invoice on every order, and the permits a regulated product like ENA needs." },
+  { title: "Repeat buyers over one-off deals", text: "Most of our work is with plants that order again. We'd like to keep it that way." },
 ];
 
 export default function AboutPage() {
-  const years = new Date().getFullYear() - company.founded;
   return (
     <>
       <PageHero
@@ -48,15 +46,15 @@ export default function AboutPage() {
           </div>
           <div className="reveal reveal-d1">
             <span className="kicker">Who we are</span>
-            <h2 style={{ fontSize: "clamp(30px,3.6vw,42px)" }}>A focused trader of green-energy raw materials</h2>
+            <h2 style={{ fontSize: "clamp(30px,3.6vw,42px)" }}>A small trading house that knows its four products well</h2>
             <p style={{ color: "var(--muted)", fontSize: 17 }}>
-              Founded in {company.founded} by <strong style={{ color: "var(--ink)" }}>{company.founder}</strong>, {company.name} began as a trading business rooted in
-              Baramati — one of Maharashtra&apos;s most important sugarcane regions. Over the years it has grown into a trusted supplier for chemical,
-              pharmaceutical, petroleum, beverage and cattle-feed manufacturers across India.
+              <strong style={{ color: "var(--ink)" }}>{company.founder}</strong> started {company.name} in {company.founded} in Baramati, one of
+              Maharashtra&apos;s biggest sugarcane regions. It began as a local trading business. Today we supply chemical, pharmaceutical, petroleum,
+              beverage and cattle-feed manufacturers across India.
             </p>
             <p style={{ color: "var(--muted)", fontSize: 17 }}>
-              We specialise in four products from the sugar and ethanol value chain, so our customers deal with a partner who understands the material,
-              the specifications and the paperwork that comes with it.
+              We stick to four products from the sugar and ethanol chain. Buyers deal with people who know the material, the specs and the
+              paperwork that goes with it.
             </p>
             <ul className="check-list">
               {products.map((p) => (
@@ -68,23 +66,24 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="stats" style={{ marginTop: 0 }} aria-label="Company at a glance">
-        <div className="container">
-          <div className="stats-grid reveal">
-            <div className="stat"><span className="s-ico"><Icon name="award" /></span><div><Counter to={Math.floor(years / 5) * 5} suffix="+" /><span>Years in trading</span></div></div>
-            <div className="stat"><span className="s-ico"><Icon name="layers" /></span><div><Counter to={products.length} /><span>Core products</span></div></div>
-            <div className="stat"><span className="s-ico"><Icon name="factory" /></span><div><Counter to={industries.length} /><span>Industries served</span></div></div>
-            <div className="stat"><span className="s-ico"><Icon name="globe" /></span><div><strong>Pan-India</strong><span>Supply network</span></div></div>
-          </div>
-        </div>
-      </section>
+      <VideoBand
+        video="/media/logistics-truck.mp4"
+        poster="/media/logistics-truck.jpg"
+        kicker="Pan-India supply"
+        title="From the sugar belt to plants across India"
+        text="Once you confirm the order, we handle dispatch, paperwork and delivery, so the material reaches your plant when production needs it."
+      />
 
       <section className="section">
-        <div className="container about-grid" style={{ alignItems: "start" }}>
-          <div className="reveal">
+        <div className="container journey">
+          <div className="journey-side reveal">
             <span className="kicker">Our journey</span>
-            <h2 style={{ fontSize: "clamp(28px,3.2vw,38px)" }}>How the business has grown</h2>
-            <p style={{ color: "var(--muted)" }}>From a local trading business in Baramati to a supplier trusted by listed chemical companies and national feed brands.</p>
+            <h2>How the business has grown</h2>
+            <p>From a local trading business in Baramati to a supplier for listed chemical companies and national feed brands.</p>
+            <figure className="journey-photo">
+              <Image src="/media/sugarcane-closeup.jpg" alt="Sugarcane growing in a field near Baramati" fill sizes="(max-width: 980px) 100vw, 480px" />
+              <figcaption>Cane country, Baramati</figcaption>
+            </figure>
           </div>
           <div className="timeline reveal reveal-d1">
             {TIMELINE.map((t) => (
@@ -99,11 +98,11 @@ export default function AboutPage() {
           <LazyVideo src="/media/lab-quality.mp4" poster="/media/lab-quality.jpg" />
         </div>
         <div className="container">
-          <SectionHead center kicker="What drives us" title="Mission, vision & values" />
+          <SectionHead kicker="How we work" title="Three rules we try to keep" lead="Nothing fancy. These are the things buyers tell us they value most." />
           <div className="mv-grid">
-            {MV.map((m, i) => (
+            {RULES.map((m, i) => (
               <div className={`mv-card reveal${i ? ` reveal-d${i}` : ""}`} key={m.title}>
-                <div className="w-ico"><Icon name={m.icon} /></div>
+                <span className="mv-num">{String(i + 1).padStart(2, "0")}</span>
                 <h3>{m.title}</h3>
                 <p>{m.text}</p>
               </div>
@@ -114,24 +113,27 @@ export default function AboutPage() {
 
       <section className="section section-soft">
         <div className="container">
-          <SectionHead kicker="Leadership" title="The people behind the business" />
+          <SectionHead kicker="Leadership" title="The people behind the business" lead="A small business on purpose. When you call, you deal with the people who run it." />
           <div className="people">
-            <div className="person reveal">
-              <div className="avatar">RS</div>
+            <article className="person reveal">
+              <div className="avatar" aria-hidden="true">RS</div>
               <div>
+                <div className="role">Founder · since {company.founded}</div>
                 <h3>{company.founder}</h3>
-                <div className="role">Founder</div>
-                <p>Founded {company.name} in {company.founded} and built its relationships across the sugar and distillery industry.</p>
+                <p>Started {company.name} in {company.founded} and built its contacts across the sugar mills and distilleries around Baramati.</p>
+                <p className="person-note">Those relationships are still what the business runs on.</p>
               </div>
-            </div>
-            <div className="person reveal reveal-d1">
-              <div className="avatar g">{company.runBy[0]}</div>
+            </article>
+            <article className="person reveal reveal-d1">
+              <div className="avatar g" aria-hidden="true">{company.runBy[0]}</div>
               <div>
-                <h3>{company.runBy}</h3>
                 <div className="role">Runs the business today</div>
-                <p>Leads day-to-day operations, customer relationships and supply across India.</p>
+                <h3>{company.runBy}</h3>
+                <p>Handles the day-to-day: buyers, supply and dispatch.</p>
+                <p className="person-note">Speak to {company.runBy} for quotes, availability and delivery.</p>
+                <a className="link-arrow" href={`tel:${company.phones[0].tel}`}>Call us: {company.phones[0].display} <Icon name="arrow-right" /></a>
               </div>
-            </div>
+            </article>
           </div>
         </div>
       </section>
