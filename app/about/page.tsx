@@ -125,7 +125,7 @@ export default function AboutPage() {
               </div>
             </article>
             <article className="person reveal reveal-d1">
-              <div className="avatar g" aria-hidden="true">{company.runBy[0]}</div>
+              <div className="avatar g" aria-hidden="true">{company.runBy.split(" ").map((w) => w[0]).join("")}</div>
               <div>
                 <div className="role">Runs the business today</div>
                 <h3>{company.runBy}</h3>

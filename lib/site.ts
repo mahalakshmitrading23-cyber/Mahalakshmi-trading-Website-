@@ -8,7 +8,7 @@ export const company = {
   tagline: "Growing with green energy",
   founded: 2010,
   founder: "Ratanraj Ganpat Salunkhe",
-  runBy: "Prathmesh",
+  runBy: "Prathmesh Salunkhe",
   gstin: "27BQJPS3525C1ZU",
   email: "mahalaxmitrading0101@gmail.com",
   phones: [
