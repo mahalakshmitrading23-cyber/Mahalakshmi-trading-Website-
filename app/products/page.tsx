@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const FAQ = [
-  { q: "Do you sell to individuals or in small quantities?", a: "No. Mahalakshmi Tradings is a B2B supplier. We supply in bulk to registered businesses and manufacturers only." },
+  { q: "Do you sell to individuals or in small quantities?", a: `No. ${company.name} is a B2B supplier. We supply in bulk to registered businesses and manufacturers only.` },
   { q: "What information do you need for a quotation?", a: "The product, required quantity, any specification or grade requirement, your delivery location and your company details. The quote form collects all of this in one go.", link: true },
   { q: "Can I enquire for more than one product at a time?", a: "Yes. You can select multiple products in a single enquiry and we will quote for all of them together." },
   { q: "Which areas do you supply?", a: "We supply across India. Delivery terms are confirmed with each quotation based on your location and quantity." },

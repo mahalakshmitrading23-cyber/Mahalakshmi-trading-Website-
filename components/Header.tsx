@@ -118,7 +118,7 @@ function Brand({ compact = false }: { compact?: boolean }) {
     <Link className="brand" href="/" aria-label={`${company.name} — home`}>
       <Image src="/img/logo-256.png" alt={compact ? "" : `${company.name} logo`} width={50} height={50} priority />
       <span className="brand-text">
-        <span className="brand-name">Mahalakshmi <span>Tradings</span></span>
+        <span className="brand-name">MAHALAXMI <span>TRADING</span></span>
         {!compact && <span className="brand-tag"><Icon name="leaf" />{company.tagline}</span>}
       </span>
     </Link>

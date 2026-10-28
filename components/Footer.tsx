@@ -24,7 +24,7 @@ export default function Footer() {
             <Link className="brand" href="/">
               <Image src="/img/logo-light-256.png" alt={`${company.name} logo`} width={50} height={50} />
               <span className="brand-text">
-                <span className="brand-name">Mahalakshmi <span>Tradings</span></span>
+                <span className="brand-name">MAHALAXMI <span>TRADING</span></span>
                 <span className="brand-tag" style={{ color: "#8d9299" }}>{company.tagline}</span>
               </span>
             </Link>

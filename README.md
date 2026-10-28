@@ -1,6 +1,6 @@
-# Mahalakshmi Tradings — Website
+# MAHALAXMI TRADING — Website
 
-B2B website for Mahalakshmi Tradings (Baramati), a trader of Denatured Anhydrous Ethanol, Special Denatured Spirit, Extra Neutral Alcohol and Molasses.
+B2B website for MAHALAXMI TRADING (Baramati), a trader of Denatured Anhydrous Ethanol, Special Denatured Spirit, Extra Neutral Alcohol and Molasses.
 
 Built with **Next.js 16 (App Router) + React 19 + TypeScript**. Pages are pre-rendered to static HTML for speed and SEO. One server route (`/api/enquiry`) emails enquiries.
 

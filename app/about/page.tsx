@@ -40,7 +40,7 @@ export default function AboutPage() {
             <span className="about-visual-inner" data-parallax="0.1">
               <Image src="/media/sugarcane-transport.jpg" alt="Sugarcane being carried from the field to the factory" fill sizes="(max-width: 980px) 100vw, 560px" />
             </span>
-            <div className="logo-chip"><Image src="/img/logo-256.png" alt="Mahalakshmi Tradings logo" width={56} height={56} /></div>
+            <div className="logo-chip"><Image src="/img/logo-256.png" alt={`${company.name} logo`} width={56} height={56} /></div>
             <div className="loc"><Icon name="pin" />{company.address.city}, {company.address.state}</div>
             <div className="since"><strong>{company.founded}</strong><span>Year established</span></div>
           </div>

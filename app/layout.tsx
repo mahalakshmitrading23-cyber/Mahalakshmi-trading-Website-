@@ -9,11 +9,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Mahalakshmi Tradings | Bulk Ethanol, Alcohol & Molasses Supplier — Baramati, India",
-    template: "%s | Mahalakshmi Tradings",
+    default: "MAHALAXMI TRADING | Bulk Ethanol, Alcohol & Molasses Supplier — Baramati, India",
+    template: "%s | MAHALAXMI TRADING",
   },
   description:
-    "Mahalakshmi Tradings is a B2B trader (since 2010) supplying Denatured Anhydrous Ethanol (99.9%), Special Denatured Spirit, Extra Neutral Alcohol and Molasses to chemical, pharma, petroleum, beverage and cattle-feed manufacturers across India.",
+    "MAHALAXMI TRADING is a B2B trader (since 2010) supplying Denatured Anhydrous Ethanol (99.9%), Special Denatured Spirit, Extra Neutral Alcohol and Molasses to chemical, pharma, petroleum, beverage and cattle-feed manufacturers across India.",
   keywords: [
     "denatured anhydrous ethanol supplier", "special denatured spirit", "extra neutral alcohol supplier", "ENA",
     "molasses supplier", "ethanol trader Maharashtra", "Baramati", "HSN 22072000",
@@ -21,13 +21,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: company.name,
-    title: "Mahalakshmi Tradings — Ethanol, Alcohol & Molasses for Industry",
+    title: "MAHALAXMI TRADING — Ethanol, Alcohol & Molasses for Industry",
     description: "B2B supplier of Denatured Anhydrous Ethanol (99.9%), SDS, ENA and Molasses. Pan-India supply since 2010.",
     images: ["/img/logo.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mahalakshmi Tradings — Bulk Ethanol, Alcohol & Molasses",
+    title: "MAHALAXMI TRADING — Bulk Ethanol, Alcohol & Molasses",
     description: "B2B supplier of Denatured Anhydrous Ethanol (99.9%), SDS, ENA and Molasses. Pan-India supply since 2010.",
     images: ["/img/logo.png"],
   },

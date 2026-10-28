@@ -4,7 +4,7 @@ import type { IconName } from "@/components/Icon";
    Edit here and every page, the footer, the enquiry form and the API update together. */
 
 export const company = {
-  name: "Mahalakshmi Tradings",
+  name: "MAHALAXMI TRADING",
   tagline: "Growing with green energy",
   founded: 2010,
   founder: "Ratanraj Ganpat Salunkhe",
