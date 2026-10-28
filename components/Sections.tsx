@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Icon, { type IconName } from "@/components/Icon";
 import { LazyVideo } from "@/components/Motion";
+import { baramatiPoint, indiaIslands, indiaOutline, indiaViewBox, routeEnds } from "@/lib/india-map";
 import { allClients, company, industries, products, waLink, type Product } from "@/lib/site";
 
 export function PageHero({
@@ -257,32 +258,30 @@ export function ProductDetail({ p }: { p: Product }) {
   );
 }
 
-/** Stylised supply routes fanning out from Baramati. Deliberately not a map outline. */
-const ROUTES = [
-  "M150 182 Q 140 90 176 26", "M150 182 Q 230 110 330 64", "M150 182 Q 280 160 372 150",
-  "M150 182 Q 250 240 318 268", "M150 182 Q 180 250 196 292", "M150 182 Q 90 120 54 86", "M150 182 Q 80 196 30 214",
-];
+/** A gentle arc from Baramati to a point, bowed to one side so the routes fan out. */
+function routePath([x1, y1]: [number, number], [x2, y2]: [number, number]) {
+  const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+  const bow = 0.18;
+  return `M${x1} ${y1} Q ${(mx - (y2 - y1) * bow).toFixed(1)} ${(my + (x2 - x1) * bow).toFixed(1)} ${x2} ${y2}`;
+}
 
+/** Map of India with supply routes fanning out from Baramati. */
 export function RouteMap() {
+  const [bx, by] = baramatiPoint;
   return (
-    <figure className="route-map" aria-label={`Bulk supply routes from ${company.address.city} to plants across India`}>
-      <svg viewBox="0 0 400 310" role="img" aria-hidden="true">
-        <defs>
-          <pattern id="route-dots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" /></pattern>
-        </defs>
-        <rect className="route-grid" width="400" height="310" fill="url(#route-dots)" />
-        {ROUTES.map((d) => {
-          const end = d.split(" ").slice(-2);
-          return (
-            <g key={d}>
-              <path className="route-line" d={d} />
-              <circle className="route-end" cx={end[0]} cy={end[1]} r="4.5" />
-            </g>
-          );
-        })}
-        <circle className="route-pulse" cx="150" cy="182" r="10" />
-        <circle className="route-pin" cx="150" cy="182" r="7" />
-        <text className="route-label" x="164" y="200">Baramati</text>
+    <figure className="route-map" aria-label={`Map of India showing bulk supply routes from ${company.address.city} to plants across the country`}>
+      <svg viewBox={indiaViewBox} aria-hidden="true">
+        <path className="route-land" d={indiaOutline} />
+        {indiaIslands.map(([x, y]) => <circle key={`${x}-${y}`} className="route-isle" cx={x} cy={y} r="1.4" />)}
+        {routeEnds.map((end, i) => (
+          <g key={end.join()}>
+            <path className="route-line" d={routePath(baramatiPoint, end)} style={{ animationDelay: `${i * -0.2}s` }} />
+            <circle className="route-end" cx={end[0]} cy={end[1]} r="3.6" />
+          </g>
+        ))}
+        <circle className="route-pulse" cx={bx} cy={by} r="8" />
+        <circle className="route-pin" cx={bx} cy={by} r="6" />
+        <text className="route-label" x={bx - 12} y={by + 4} textAnchor="end">Baramati</text>
       </svg>
       <figcaption>Supplied pan-India from Baramati</figcaption>
     </figure>

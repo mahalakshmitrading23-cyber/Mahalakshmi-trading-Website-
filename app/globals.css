@@ -1333,13 +1333,14 @@ h3 { font-variation-settings: "opsz" 24; letter-spacing: -.005em; }
 .desk-reach .desk-facts > div { padding: 20px 0; border-bottom: 1px dashed var(--grey-300); }
 .desk-reach .desk-facts > div:first-child { padding-top: 0; }
 .route-map { margin: 0; background: #fffdf8; border: 1px solid var(--line); padding: 18px; }
-.route-map svg { width: 100%; height: auto; display: block; }
-#route-dots circle { fill: var(--grey-300); }
+.route-map svg { width: 100%; max-width: 440px; height: auto; display: block; margin: 0 auto; }
+.route-land { fill: var(--bg-soft); stroke: var(--ink); stroke-width: 1; stroke-linejoin: round; }
+.route-isle { fill: var(--bg-soft); stroke: var(--ink); stroke-width: .8; }
 .route-line { fill: none; stroke: var(--orange); stroke-width: 1.6; stroke-dasharray: 4 5; animation: route-flow 1.4s linear infinite; }
 .route-end { fill: #fffdf8; stroke: var(--ink); stroke-width: 1.5; }
 .route-pin { fill: var(--orange); stroke: #fffdf8; stroke-width: 3; }
 .route-pulse { fill: none; stroke: var(--orange); stroke-width: 1.5; transform-box: fill-box; transform-origin: center; animation: route-pulse 2.4s ease-out infinite; }
-.route-label { font-family: var(--font-mono); font-size: 13px; fill: var(--ink); letter-spacing: .04em; paint-order: stroke; stroke: #fffdf8; stroke-width: 6px; stroke-linejoin: round; }
+.route-label { font-family: var(--font-mono); font-size: 14px; font-weight: 500; fill: var(--ink); letter-spacing: .04em; paint-order: stroke; stroke: #fffdf8; stroke-width: 6px; stroke-linejoin: round; }
 .route-map figcaption { margin-top: 10px; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 @keyframes route-flow { to { stroke-dashoffset: -18; } }
 @keyframes route-pulse { 0% { transform: scale(1); opacity: .8; } 100% { transform: scale(3.2); opacity: 0; } }

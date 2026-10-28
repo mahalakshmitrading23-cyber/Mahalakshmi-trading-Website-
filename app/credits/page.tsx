@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function CreditsPage() {
   return (
     <>
-      <PageHero crumbs={[{ label: "Credits" }]} title="Image & video credits" lead="Photos and videos on this website are used under the licences listed below." />
+      <PageHero crumbs={[{ label: "Credits" }]} title="Image, video & map credits" lead="Photos, videos and map data on this website are used under the licences listed below." />
       <section className="section">
         <div className="container">
           <ul className="credits-list">

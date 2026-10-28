@@ -96,5 +96,13 @@ export const mediaCredits = [
     "license": "Mixkit Stock Video Free License",
     "licenseUrl": "https://mixkit.co/license/#videoFree",
     "source": "https://mixkit.co/free-stock-video/drops-filling-a-lab-tube-17456/"
+  },
+  {
+    "file": "/lib/india-map.ts",
+    "title": "Map of India (official boundary as per Survey of India), simplified",
+    "author": "DataMeet India community",
+    "license": "CC0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "source": "https://github.com/datameet/maps/tree/master/Country"
   }
 ] as const;
